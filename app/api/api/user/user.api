@@ -1,0 +1,478 @@
+syntax = "v1"
+
+type (
+    // 通用基础
+    Base {
+        ID        uint64 `gorm:"column:id;primaryKey;autoIncrement" json:"id"`
+        CreatedAt string `gorm:"column:created_at;autoCreateTime" json:"created_at"`
+        UpdatedAt string `gorm:"column:updated_at;autoUpdateTime" json:"updated_at"`
+        IsDeleted bool   `gorm:"column:is_deleted;default:false" json:"is_deleted"`
+    }
+
+    // 用户分页
+    PageData {
+        List  []interface{} `json:"list"`
+        Page  int           `json:"page"`
+        Size  int           `json:"size"`
+        Total int           `json:"total"`
+    }
+
+    // 用户相关
+    ComerResponse {
+        Activation     bool   `json:"activation"`
+        Address        string `json:"address"`
+        Avatar         string `json:"avatar"`
+        Banner         string `json:"banner"`
+        CustomDomain   string `json:"custom_domain"`
+        Id             int    `json:"id"`
+        InvitationCode string `json:"invitation_code"`
+        IsConnected    bool   `json:"is_connected"`
+        IsSeted        bool   `json:"is_seted"`
+        Location       string `json:"location"`
+        Name           string `json:"name"`
+        TimeZone       string `json:"time_zone"`
+    }
+
+    MessageResponse {
+        Message string `json:"message"`
+    }
+
+    ComerInfoDetailResponse {
+        Accounts       []ComerAccountResponse      `json:"accounts"`
+        Activation     bool                        `json:"activation"`
+        Address        string                      `json:"address"`
+        Avatar         string                      `json:"avatar"`
+        Banner         string                      `json:"banner"`
+        ConnectedTotal ComerConnectedTotalResponse `json:"connected_total"`
+        CustomDomain   string                      `json:"custom_domain"`
+        Educations     []ComerEducation            `json:"educations"`
+        Id             int                         `json:"id"`
+        Info           ComerInfo                   `json:"info"`
+        InvitationCode string                      `json:"invitation_code"`
+        IsConnected    bool                        `json:"is_connected"`
+        Languages      []ComerLanguageResponse     `json:"languages"`
+        Location       string                      `json:"location"`
+        Name           string                      `json:"name"`
+        Skills         []TagRelationResponse       `json:"skills"`
+        Socials        []SocialBookResponse        `json:"socials"`
+        TimeZone       string                      `json:"time_zone"`
+    }
+
+    ComerAccountResponse {
+        Avatar    string `json:"avatar"`
+        ComerId   int    `json:"comer_id"`
+        Id        int    `json:"id"`
+        IsLinked  bool   `json:"is_linked"`
+        IsPrimary bool   `json:"is_primary"`
+        Nickname  string `json:"nickname"`
+        Oin       string `json:"oin"`
+        Type      int    `json:"type"`
+    }
+
+    ComerConnectedTotalResponse {
+        BeConnectComerTotal int `json:"be_connect_comer_total"`
+        ConnectComerTotal   int `json:"connect_comer_total"`
+        ConnectStartupTotal int `json:"connect_startup_total"`
+    }
+
+    ComerEducation {
+        ComerId     int    `json:"comer_id"`
+        GraduatedAt string `json:"graduated_at"`
+        Id          int    `json:"id"`
+        Major       string `json:"major"`
+        School      string `json:"school"`
+    }
+
+    ComerInfo {
+        Bio     string `json:"bio"`
+        ComerId int    `json:"comer_id"`
+        Id      int    `json:"id"`
+    }
+
+    ComerLanguageResponse {
+        ComerId    int      `json:"comer_id"`
+        Id         int      `json:"id"`
+        Language   Language `json:"language"`
+        LanguageId int      `json:"language_id"`
+        Level      int      `json:"level"`
+    }
+
+    Language {
+        Code string `json:"code"`
+        Id   int    `json:"id"`
+        Name string `json:"name"`
+    }
+
+    SocialBookResponse {
+        Id           int                `json:"id"`
+        SocialTool   SocialToolResponse `json:"social_tool"`
+        SocialToolId int                `json:"social_tool_id"`
+        TargetId     int                `json:"target_id"`
+        Type         int                `json:"type"`
+        Value        string             `json:"value"`
+    }
+
+    SocialToolResponse {
+        Id   int    `json:"id"`
+        Logo string `json:"logo"`
+        Name string `json:"name"`
+    }
+
+    TagRelationResponse {
+        Id       int        `json:"id"`
+        Tag      TagResponse `json:"tag"`
+        TagId    int        `json:"tag_id"`
+        TargetId int        `json:"target_id"`
+        Type     int        `json:"type"`
+    }
+
+    TagResponse {
+        Id   int    `json:"id"`
+        Name string `json:"name"`
+        Type int    `json:"type"`
+    }
+
+    TagListResponse {
+        List []TagResponse `json:"list"`
+    }
+
+    ComerInvitationCountResponse {
+        ActivatedTotal int `json:"activated_total"`
+        InactiveTotal  int `json:"inactive_total"`
+    }
+
+    StartupListResponse {
+        List  []SimpleStartupInfo `json:"list"`
+        Total int                 `json:"total"`
+    }
+
+    SimpleStartupInfo {
+        Avatar  string `json:"avatar"`
+        Id      int    `json:"id"`
+        Name    string `json:"name"`
+        OnChain bool   `json:"on_chain"`
+    }
+
+    ComerBasicResponse {
+        Activation     bool   `json:"activation"`
+        Address        string `json:"address"`
+        Avatar         string `json:"avatar"`
+        Banner         string `json:"banner"`
+        CustomDomain   string `json:"custom_domain"`
+        Id             int    `json:"id"`
+        InvitationCode string `json:"invitation_code"`
+        IsConnected    bool   `json:"is_connected"`
+        Location       string `json:"location"`
+        Name           string `json:"name"`
+        TimeZone       string `json:"time_zone"`
+    }
+
+    IsExistResponse {
+        IsExist bool `json:"is_exist"`
+    }
+
+    ThirdPartyVerifyResponse {
+        Verify bool `json:"verify"`
+    }
+
+    IsConnectedResponse {
+        IsConnected bool `json:"is_connected"`
+    }
+
+    ProjectCountResponse {
+        BountyCount        int `json:"bounty_count"`
+        CrowdfundingCount  int `json:"crowdfunding_count"`
+        GovernanceCount    int `json:"governance_count"`
+        OtherDappCount     int `json:"other_dapp_count"`
+        SaleLaunchpadCount int `json:"sale_launchpad_count"`
+        StartupCount       int `json:"startup_count"`
+    }
+
+    LanguageResponse {
+        Code string `json:"code"`
+        Id   int    `json:"id"`
+        Name string `json:"name"`
+    }
+
+    ShareSetResponse {
+        ShareCode string `json:"share_code"`
+    }
+
+    JwtAuthorizationResponse {
+        Token string `json:"token"`
+    }
+
+    WalletNonceResponse {
+        Nonce string `json:"nonce"`
+    }
+
+    ListResponse {
+        Page  int64         `json:"page"`
+        Size  int64         `json:"size"`
+        Total int64         `json:"total"`
+        List  []TagResponse `json:"list"`
+    }
+
+    ComerLoginResponse {
+        ComerID       uint64                     `json:"comerID"`
+        Nick          string                     `json:"nick"`
+        Avatar        string                     `json:"avatar"`
+        Address       string                     `json:"address"`
+        Token         string                     `json:"token"`
+        IsProfiled    bool                       `json:"isProfiled"`
+        FirstLogin    bool                       `json:"firstLogin"`
+        ComerAccounts []*OauthAccountBindingInfo `json:"comerAccounts"`
+    }
+
+    OauthAccountBindingInfo {
+        Linked      bool             `json:"linked"`
+        AccountType int              `json:"accountType"`
+        AccountId   uint64           `json:"accountId"`
+    }
+
+)
+
+
+type(
+    EthLoginRequest{
+        Address   string `json:"address" binding:"len=42,startswith=0x"`
+	    Signature string `json:"signature" binding:"required"`
+    }
+
+    GetNonceByAddressRequest {
+        WalletAddress string `path:"wallet_address"`
+    }
+
+    UpdateComerInfoRequest {
+        ComerId    int64  `json:"comer_id"`
+        Name       string `json:"name"`
+        Avatar     string `json:"avatar"`
+        Cover      string `json:"cover"`
+        Location   string `json:"location"`
+        TimeZone   string `json:"time_zone"`
+        Website    string `json:"website"`
+        Email      string `json:"email"`
+        Twitter    string `json:"twitter"`
+        Discord    string `json:"discord"`
+        Telegram   string `json:"telegram"`
+        Medium     string `json:"medium"`
+        Facebook   string `json:"facebook"`
+        Linktree   string `json:"linktree"`
+        Bio        string `json:"bio"`
+        Languages  string `json:"languages"`
+        Educations string `json:"educations"`
+    }
+)
+
+@server(
+    group: comer
+    prefix: api/comer
+    middleware: OIDCAuthMiddleware
+)
+service metaLand {
+
+    @doc "获取用户信息" 
+    @handler GetComer
+    get / returns (ComerResponse)
+
+    @doc "更新用户信息"
+    @handler UpdateComerInfo
+    put / (UpdateComerInfoRequest) returns (MessageResponse)
+
+    @doc "解绑用户账号"
+    @handler UnlinkOauthByComerAccountId
+    delete /accounts/:comer_account_id returns (MessageResponse)
+
+    @doc "更新用户简介"
+    @handler UpdateComerInfoBio
+    put /bio returns (MessageResponse)
+
+    @doc "获取用户详情"
+    @handler GetComerInfoDetail
+    get /detail returns (ComerInfoDetailResponse)
+
+    @doc "绑定用户教育经历"
+    @handler BindComerEducations
+    post /educations returns (MessageResponse)
+
+    @doc "更新用户教育经历"
+    @handler UpdateComerEducation
+    put /educations/:comer_education_id returns (MessageResponse)
+
+    @doc "解绑用户教育经历"
+    @handler UnbindComerEducations
+    delete /educations/:comer_education_id returns (MessageResponse)
+
+    @doc "获取用户邀请人数"
+    @handler GetComerInvitationCount
+    get /invitation-count returns (ComerInvitationCountResponse)
+
+    @doc "获取用户邀请记录"
+    @handler GetComerInvitationRecords
+    get /invitation-records returns (PageData)
+
+    @doc "绑定用户语言"
+    @handler BindComerLanguages
+    post /languages returns (MessageResponse)
+
+    @doc "更新用户语言"
+    @handler UpdateComerLanguages
+    put /languages/:comer_language_id returns (MessageResponse)
+
+    @doc "解绑用户语言"
+    @handler UnbindComerLanguages
+    delete /languages/:comer_language_id returns (MessageResponse)
+
+    @doc "获取用户加入和关注的创业公司"
+    @handler GetComerJoinedAndFollowedStartups
+    get /related-startups returns (StartupListResponse)
+
+    @doc "绑定用户技能"
+    @handler BindComerSkills
+    post /skills returns (MessageResponse)
+
+    @doc "绑定用户社交"
+    @handler BindComerSocials
+    post /socials returns (MessageResponse)
+
+    @doc "更新用户社交"
+    @handler UpdateComerSocials
+    put /socials/:soical_book_id returns (MessageResponse)
+
+    @doc "解绑用户社交"
+    @handler UnbindComerSocials
+    delete /socials/:soical_book_id returns (MessageResponse)
+}
+
+@server(
+    group: comers
+    prefix: api/comers
+    middleware: OIDCAuthMiddleware
+)
+
+service metaLand {
+
+    @doc "设置用户自定义域名"
+    @handler SetUserCustomDomain
+    put /domains returns (MessageResponse)
+
+    @doc "通过地址获取用户"
+    @handler GetComerByAddress
+    get /address/:address returns (ComerBasicResponse)
+
+    @doc "查询自定义域名是否存在"
+    @handler GetUserCustomDomainExistence
+    get /domains/existence returns (IsExistResponse)
+
+    @doc "通过自定义域名获取用户"
+    @handler GetUserCustomDomain
+    get /domains/:custom_domain returns (ComerInfoDetailResponse)
+
+    @doc "校验用户是否可添加资料"
+    @handler VerifyComerAddProfile
+    get /verify/profile returns (ThirdPartyVerifyResponse)
+
+    @doc "通过comer_id获取用户"
+    @handler GetComerByComerId
+    get /:comer_id returns (ComerInfoDetailResponse)
+
+    @doc "获取被该用户连接的comer列表"
+    @handler GetComerBeConnectComersByComerId
+    get /:comer_id/be_connect/comers returns (PageData)
+
+    @doc "连接某个comer"
+    @handler ConnectComer
+    post /:comer_id/connect returns (MessageResponse)
+
+    @doc "取消连接某个comer"
+    @handler UnconnectComer
+    delete /:comer_id/connect returns (MessageResponse)
+
+    @doc "获取该用户连接的comer列表"
+    @handler GetComerConnectComersByComerId
+    get /:comer_id/connect/comers returns (PageData)
+
+    @doc "获取该用户连接的startup列表"
+    @handler GetStartupConnectByComerId
+    get /:comer_id/connect/startups returns (PageData)
+
+    @doc "获取该用户的连接状态"
+    @handler ConnectedComer
+    get /:comer_id/connected returns (IsConnectedResponse)
+
+    @doc "通过comer_id获取用户详情"
+    @handler GetComerInfoDetailByComerId
+    get /:comer_id/detail returns (ComerInfoDetailResponse)
+
+    @doc "获取该用户参与的项目数量"
+    @handler GetComerParticipatedCountByComerId
+    get /:comer_id/participated/count returns (ProjectCountResponse)
+
+    @doc "获取该用户发布的项目数量"
+    @handler GetComerPostedCountByComerId
+    get /:comer_id/posted/count returns (ProjectCountResponse)
+}
+
+@server(
+    group: languages
+    prefix: api/languages
+    middleware: OIDCAuthMiddleware
+)
+service metaLand {
+
+    @doc "获取语言列表"
+    @handler GetLanguages
+    get / returns (LanguageResponse)
+}
+
+@server(
+    group: share
+    prefix: api/share
+    middleware: OIDCAuthMiddleware
+)
+service metaLand {
+
+    @doc "设置分享"
+    @handler SetShare
+    put / returns (ShareSetResponse)
+
+     @doc "获取分享"
+    @handler GetSharePageHtml
+    get /:share_code returns (string)
+}
+
+@server(
+    group: authorizations
+    prefix: api/authorizations
+    middleware: GuestAuthorizationMiddleware
+)
+service metaLand {
+
+    @doc "Github 授权登录"  
+    @handler GithubOauth
+    post /github returns (JwtAuthorizationResponse)
+
+    @doc "Google 授权登录"
+    @handler GoogleOauth
+    post /google returns (JwtAuthorizationResponse)
+
+    @doc "钱包地址登录"
+    @handler LoginByWalletAddress
+    post /wallet (EthLoginRequest) returns (ComerLoginResponse)
+
+    @doc "获取钱包地址登录用的 nonce"
+    @handler GetNonceByAddress
+    get /:wallet_address/nonce (GetNonceByAddressRequest) returns (WalletNonceResponse)
+}
+
+@server(
+    group: tags
+    prefix: api/tags
+    middleware: OIDCAuthMiddleware
+)
+service metaLand {
+
+    @doc "根据类型获取标签列表"
+    @handler GetTagsByTagType
+    get /:type returns (ListResponse)
+}

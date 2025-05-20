@@ -2,14 +2,14 @@ package middleware
 
 import "net/http"
 
-type OIDCAuthMiddleware struct {
+type GuestAuthorizationMiddleware struct {
 }
 
-func NewOIDCAuthMiddleware() *OIDCAuthMiddleware {
-	return &OIDCAuthMiddleware{}
+func NewGuestAuthorizationMiddleware() *GuestAuthorizationMiddleware {
+	return &GuestAuthorizationMiddleware{}
 }
 
-func (m *OIDCAuthMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
+func (m *GuestAuthorizationMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// TODO generate middleware implement function, delete after code implementation
 

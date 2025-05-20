@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `bounty`;
 CREATE TABLE `bounty` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `chain_id` bigint NOT NULL DEFAULT '0' COMMENT 'Chain ID',
   `tx_hash` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'Transcation Hash',
   `deposit_contract` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'Contract Address',
@@ -71,7 +71,7 @@ CREATE TABLE `bounty_applicant` (
 -- ----------------------------
 DROP TABLE IF EXISTS `bounty_contact`;
 CREATE TABLE `bounty_contact` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `bounty_id` bigint NOT NULL DEFAULT '0',
   `contact_type` tinyint NOT NULL DEFAULT '0',
   `contact_address` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',

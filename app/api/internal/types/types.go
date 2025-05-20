@@ -3,8 +3,88 @@
 
 package types
 
+type Base struct {
+	ID        uint64 `gorm:"column:id;primaryKey;autoIncrement" json:"id"`
+	CreatedAt string `gorm:"column:created_at;autoCreateTime" json:"created_at"`
+	UpdatedAt string `gorm:"column:updated_at;autoUpdateTime" json:"updated_at"`
+	IsDeleted bool   `gorm:"column:is_deleted;default:false" json:"is_deleted"`
+}
+
+type ComerAccountResponse struct {
+	Avatar    string `json:"avatar"`
+	ComerId   int    `json:"comer_id"`
+	Id        int    `json:"id"`
+	IsLinked  bool   `json:"is_linked"`
+	IsPrimary bool   `json:"is_primary"`
+	Nickname  string `json:"nickname"`
+	Oin       string `json:"oin"`
+	Type      int    `json:"type"`
+}
+
+type ComerConnectedTotalResponse struct {
+	BeConnectComerTotal int `json:"be_connect_comer_total"`
+	ConnectComerTotal   int `json:"connect_comer_total"`
+	ConnectStartupTotal int `json:"connect_startup_total"`
+}
+
+type ComerEducation struct {
+	ComerId     int    `json:"comer_id"`
+	GraduatedAt string `json:"graduated_at"`
+	Id          int    `json:"id"`
+	Major       string `json:"major"`
+	School      string `json:"school"`
+}
+
+type ComerInfo struct {
+	Bio     string `json:"bio"`
+	ComerId int    `json:"comer_id"`
+	Id      int    `json:"id"`
+}
+
+type ComerLanguageResponse struct {
+	ComerId    int      `json:"comer_id"`
+	Id         int      `json:"id"`
+	Language   Language `json:"language"`
+	LanguageId int      `json:"language_id"`
+	Level      int      `json:"level"`
+}
+
 type FollowRelation struct {
 	ComerID uint64 `json:comerID`
+}
+
+type Language struct {
+	Code string `json:"code"`
+	Id   int    `json:"id"`
+	Name string `json:"name"`
+}
+
+type OauthAccountBindingInfo struct {
+	Linked      bool   `json:"linked"`
+	AccountType int    `json:"accountType"`
+	AccountId   uint64 `json:"accountId"`
+}
+
+type SimpleStartupInfo struct {
+	Avatar  string `json:"avatar"`
+	Id      int    `json:"id"`
+	Name    string `json:"name"`
+	OnChain bool   `json:"on_chain"`
+}
+
+type SocialBookResponse struct {
+	Id           int                `json:"id"`
+	SocialTool   SocialToolResponse `json:"social_tool"`
+	SocialToolId int                `json:"social_tool_id"`
+	TargetId     int                `json:"target_id"`
+	Type         int                `json:"type"`
+	Value        string             `json:"value"`
+}
+
+type SocialToolResponse struct {
+	Id   int    `json:"id"`
+	Logo string `json:"logo"`
+	Name string `json:"name"`
 }
 
 type Startup struct {
@@ -35,6 +115,24 @@ type Tag struct {
 	Name     string `json:"name"`
 	Category string `json:"category"`
 	IsIndex  bool   `json:"isIndex"`
+}
+
+type TagListResponse struct {
+	List []TagResponse `json:"list"`
+}
+
+type TagRelationResponse struct {
+	Id       int         `json:"id"`
+	Tag      TagResponse `json:"tag"`
+	TagId    int         `json:"tag_id"`
+	TargetId int         `json:"target_id"`
+	Type     int         `json:"type"`
+}
+
+type TagResponse struct {
+	Id   int    `json:"id"`
+	Name string `json:"name"`
+	Type int    `json:"type"`
 }
 
 type Wallet struct {

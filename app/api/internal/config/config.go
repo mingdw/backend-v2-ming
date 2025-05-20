@@ -14,4 +14,9 @@ type Config struct {
 		AccessSecret string
 		AccessExpire int64
 	}
+	Redis struct {
+		Host     string
+		Password string
+		DB       int
+	}
 }
