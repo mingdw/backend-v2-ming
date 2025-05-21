@@ -17,7 +17,6 @@ type ComerBasicResponse struct {
 	TimeZone       string `json:"time_zone"`
 }
 
-
 type IsConnectedResponse struct {
 	IsConnected bool `json:"is_connected"`
 }
@@ -25,6 +24,7 @@ type IsConnectedResponse struct {
 type IsExistResponse struct {
 	IsExist bool `json:"is_exist"`
 }
+
 
 type ProjectCountResponse struct {
 	BountyCount        int `json:"bounty_count"`

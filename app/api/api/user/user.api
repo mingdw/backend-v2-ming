@@ -262,6 +262,10 @@ type(
         Languages  string `json:"languages"`
         Educations string `json:"educations"`
     }
+
+    UnlinkOauthByComerAccountIdRequest {
+        ComerAccountId int64 `path:"comer_account_id" validate:"required,gte=0"`
+    }
 )
 
 @server(
@@ -281,11 +285,11 @@ service metaLand {
 
     @doc "解绑用户账号"
     @handler UnlinkOauthByComerAccountId
-    delete /accounts/:comer_account_id returns (MessageResponse)
+    delete /accounts/:comer_account_id (UnlinkOauthByComerAccountIdRequest) returns (MessageResponse)
 
     @doc "更新用户简介"
     @handler UpdateComerInfoBio
-    put /bio returns (MessageResponse)
+    put /bio (UpdateComerInfoRequest) returns (MessageResponse)
 
     @doc "获取用户详情"
     @handler GetComerInfoDetail

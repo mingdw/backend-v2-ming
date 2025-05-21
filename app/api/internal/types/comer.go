@@ -60,6 +60,10 @@ type StartupListResponse struct {
 	Total int                 `json:"total"`
 }
 
+type UnlinkOauthByComerAccountIdRequest struct {
+	ComerAccountId int64 `path:"comer_account_id" validate:"required,gte=0"`
+}
+
 type UpdateComerInfoRequest struct {
 	ComerId    int64  `json:"comer_id"`
 	Name       string `json:"name"`

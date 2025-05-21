@@ -87,7 +87,7 @@ CREATE TABLE `bounty_contact` (
 -- ----------------------------
 DROP TABLE IF EXISTS `bounty_deposit`;
 CREATE TABLE `bounty_deposit` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `chain_id` bigint NOT NULL DEFAULT '0',
   `tx_hash` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT '0',
@@ -109,7 +109,7 @@ CREATE TABLE `bounty_deposit` (
 -- ----------------------------
 DROP TABLE IF EXISTS `bounty_payment_period`;
 CREATE TABLE `bounty_payment_period` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `bounty_id` bigint NOT NULL DEFAULT '0',
   `period_type` tinyint(1) NOT NULL DEFAULT '0',
   `period_amount` bigint NOT NULL DEFAULT '0',
@@ -131,7 +131,7 @@ CREATE TABLE `bounty_payment_period` (
 -- ----------------------------
 DROP TABLE IF EXISTS `bounty_payment_terms`;
 CREATE TABLE `bounty_payment_terms` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `bounty_id` bigint NOT NULL DEFAULT '0',
   `payment_mode` tinyint(1) NOT NULL DEFAULT '0',
   `token1_symbol` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
@@ -152,7 +152,7 @@ CREATE TABLE `bounty_payment_terms` (
 -- ----------------------------
 DROP TABLE IF EXISTS `chain`;
 CREATE TABLE `chain` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `chain_id` bigint NOT NULL DEFAULT '0' COMMENT 'Chain ID',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'Chain name',
   `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'Chain logo',
@@ -169,7 +169,7 @@ CREATE TABLE `chain` (
 -- ----------------------------
 DROP TABLE IF EXISTS `chain_contract`;
 CREATE TABLE `chain_contract` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `chain_id` bigint NOT NULL DEFAULT '0' COMMENT 'Chain ID',
   `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'Chain contract address',
   `project` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1 Startup, 2 Bounty, 3 Crowdfunding, 4 Gover',
@@ -188,7 +188,7 @@ CREATE TABLE `chain_contract` (
 -- ----------------------------
 DROP TABLE IF EXISTS `chain_endpoint`;
 CREATE TABLE `chain_endpoint` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `protocol` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Communication protocol, 1-rpc 2-wss',
   `chain_id` bigint NOT NULL DEFAULT '0' COMMENT 'Chain ID',
   `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'Chain name',
@@ -204,7 +204,7 @@ CREATE TABLE `chain_endpoint` (
 -- ----------------------------
 DROP TABLE IF EXISTS `comer`;
 CREATE TABLE `comer` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `address` char(42) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT 'comer could save some useful info on block chain with this address',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -218,7 +218,7 @@ CREATE TABLE `comer` (
 -- ----------------------------
 DROP TABLE IF EXISTS `comer_account`;
 CREATE TABLE `comer_account` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `comer_id` bigint NOT NULL DEFAULT '0' COMMENT 'comer unique identifier',
   `oin` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT 'comer outer account unique identifier, wallet will be public key and Oauth is the OauthID',
   `is_primary` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'comer use this account as primay account',
@@ -253,7 +253,7 @@ CREATE TABLE `comer_follow_rel` (
 -- ----------------------------
 DROP TABLE IF EXISTS `comer_profile`;
 CREATE TABLE `comer_profile` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `comer_id` bigint NOT NULL DEFAULT '0',
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT 'name',
   `avatar` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT 'avatar',
@@ -283,7 +283,7 @@ CREATE TABLE `comer_profile` (
 -- ----------------------------
 DROP TABLE IF EXISTS `crowdfunding`;
 CREATE TABLE `crowdfunding` (
-  `id` bigint NOT NULL COMMENT 'crowdfunding id',
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'crowdfunding id',
   `chain_id` bigint NOT NULL DEFAULT '0' COMMENT 'Chain id',
   `tx_hash` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Tx hash',
   `crowdfunding_contract` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Crowdfunding contract address',
@@ -328,7 +328,7 @@ CREATE TABLE `crowdfunding` (
 -- ----------------------------
 DROP TABLE IF EXISTS `crowdfunding_ibo_rate`;
 CREATE TABLE `crowdfunding_ibo_rate` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `crowdfunding_id` bigint NOT NULL DEFAULT '0' COMMENT 'Crowdfunding id',
   `end_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'End time',
   `max_buy_amount` decimal(38,18) NOT NULL DEFAULT '0.000000000000000000' COMMENT 'Maximum buy amount',
@@ -345,7 +345,7 @@ CREATE TABLE `crowdfunding_ibo_rate` (
 -- ----------------------------
 DROP TABLE IF EXISTS `crowdfunding_investor`;
 CREATE TABLE `crowdfunding_investor` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `crowdfunding_id` bigint NOT NULL DEFAULT '0' COMMENT 'Crowdfunding id',
   `comer_id` bigint NOT NULL DEFAULT '0' COMMENT 'Investor'' comer id',
   `buy_token_total` decimal(38,18) NOT NULL DEFAULT '0.000000000000000000' COMMENT 'Buy token total',
@@ -363,7 +363,7 @@ CREATE TABLE `crowdfunding_investor` (
 -- ----------------------------
 DROP TABLE IF EXISTS `crowdfunding_swap`;
 CREATE TABLE `crowdfunding_swap` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `chain_id` bigint NOT NULL DEFAULT '0' COMMENT 'Chain id',
   `tx_hash` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Tx hash',
   `timestamp` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -387,7 +387,7 @@ CREATE TABLE `crowdfunding_swap` (
 -- ----------------------------
 DROP TABLE IF EXISTS `dict_data`;
 CREATE TABLE `dict_data` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `startup_id` bigint NOT NULL DEFAULT '0',
   `dict_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `dict_label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
@@ -406,7 +406,7 @@ CREATE TABLE `dict_data` (
 -- ----------------------------
 DROP TABLE IF EXISTS `governance_admin`;
 CREATE TABLE `governance_admin` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `setting_id` bigint NOT NULL DEFAULT '0',
   `wallet_address` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -420,7 +420,7 @@ CREATE TABLE `governance_admin` (
 -- ----------------------------
 DROP TABLE IF EXISTS `governance_choice`;
 CREATE TABLE `governance_choice` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `proposal_id` bigint NOT NULL DEFAULT '0',
   `item_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `seq_num` tinyint NOT NULL DEFAULT '0',
@@ -435,7 +435,7 @@ CREATE TABLE `governance_choice` (
 -- ----------------------------
 DROP TABLE IF EXISTS `governance_proposal`;
 CREATE TABLE `governance_proposal` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `startup_id` bigint NOT NULL DEFAULT '0',
   `author_comer_id` bigint NOT NULL DEFAULT '0',
   `author_wallet_address` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
@@ -461,7 +461,7 @@ CREATE TABLE `governance_proposal` (
 -- ----------------------------
 DROP TABLE IF EXISTS `governance_setting`;
 CREATE TABLE `governance_setting` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `startup_id` bigint NOT NULL DEFAULT '0',
   `comer_id` bigint NOT NULL DEFAULT '0',
   `vote_symbol` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
@@ -479,7 +479,7 @@ CREATE TABLE `governance_setting` (
 -- ----------------------------
 DROP TABLE IF EXISTS `governance_strategy`;
 CREATE TABLE `governance_strategy` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `setting_id` bigint NOT NULL DEFAULT '0',
   `dict_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `strategy_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
@@ -499,7 +499,7 @@ CREATE TABLE `governance_strategy` (
 -- ----------------------------
 DROP TABLE IF EXISTS `governance_vote`;
 CREATE TABLE `governance_vote` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `proposal_id` bigint NOT NULL DEFAULT '0',
   `voter_comer_id` bigint NOT NULL DEFAULT '0',
   `voter_wallet_address` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
@@ -518,7 +518,7 @@ CREATE TABLE `governance_vote` (
 -- ----------------------------
 DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `category` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
   `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT 'name',
   `url` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT 'url',
@@ -534,7 +534,7 @@ CREATE TABLE `image` (
 -- ----------------------------
 DROP TABLE IF EXISTS `post_update`;
 CREATE TABLE `post_update` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `source_type` tinyint(1) NOT NULL DEFAULT '0',
   `source_id` bigint NOT NULL DEFAULT '0',
   `comer_id` bigint NOT NULL DEFAULT '0',
@@ -551,7 +551,7 @@ CREATE TABLE `post_update` (
 -- ----------------------------
 DROP TABLE IF EXISTS `startup`;
 CREATE TABLE `startup` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `comer_id` bigint NOT NULL DEFAULT '0' COMMENT 'comer_id',
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT 'name',
   `mode` smallint NOT NULL DEFAULT '0' COMMENT '0:NONE, 1:ESG, 2:NGO, 3:DAO, 4:COM',
@@ -594,7 +594,7 @@ CREATE TABLE `startup` (
 -- ----------------------------
 DROP TABLE IF EXISTS `startup_follow_rel`;
 CREATE TABLE `startup_follow_rel` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `comer_id` bigint NOT NULL DEFAULT '0' COMMENT 'comer_id',
   `startup_id` bigint NOT NULL DEFAULT '0' COMMENT 'startup_id',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -608,7 +608,7 @@ CREATE TABLE `startup_follow_rel` (
 -- ----------------------------
 DROP TABLE IF EXISTS `startup_group`;
 CREATE TABLE `startup_group` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `comer_id` bigint NOT NULL DEFAULT '0' COMMENT 'comer_id',
   `startup_id` bigint NOT NULL DEFAULT '0' COMMENT 'startup_id',
   `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT 'group name',
@@ -623,7 +623,7 @@ CREATE TABLE `startup_group` (
 -- ----------------------------
 DROP TABLE IF EXISTS `startup_group_member_rel`;
 CREATE TABLE `startup_group_member_rel` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `comer_id` bigint NOT NULL DEFAULT '0' COMMENT 'comer_id',
   `startup_id` bigint NOT NULL DEFAULT '0' COMMENT 'startup_id',
   `group_id` bigint NOT NULL DEFAULT '0' COMMENT 'group id',
@@ -638,7 +638,7 @@ CREATE TABLE `startup_group_member_rel` (
 -- ----------------------------
 DROP TABLE IF EXISTS `startup_team_member_rel`;
 CREATE TABLE `startup_team_member_rel` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `comer_id` bigint NOT NULL DEFAULT '0' COMMENT 'comer_id',
   `startup_id` bigint NOT NULL DEFAULT '0' COMMENT 'startup_id',
   `position` text NOT NULL COMMENT 'title',
@@ -653,7 +653,7 @@ CREATE TABLE `startup_team_member_rel` (
 -- ----------------------------
 DROP TABLE IF EXISTS `startup_wallet`;
 CREATE TABLE `startup_wallet` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `comer_id` bigint NOT NULL DEFAULT '0' COMMENT 'comer_id',
   `startup_id` bigint NOT NULL DEFAULT '0' COMMENT 'startup_id',
   `wallet_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT 'wallet name',
@@ -685,7 +685,7 @@ CREATE TABLE `tag` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tag_target_rel`;
 CREATE TABLE `tag_target_rel` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `target` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT 'comerSkill,startup',
   `target_id` bigint NOT NULL DEFAULT '0' COMMENT 'target id',
   `tag_id` bigint NOT NULL DEFAULT '0' COMMENT 'skill id',
@@ -700,7 +700,7 @@ CREATE TABLE `tag_target_rel` (
 -- ----------------------------
 DROP TABLE IF EXISTS `transaction`;
 CREATE TABLE `transaction` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `chain_id` bigint NOT NULL DEFAULT '0',
   `tx_hash` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `timestamp` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -711,7 +711,7 @@ CREATE TABLE `transaction` (
   `created_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
+  PRIMARY KEY (`id`) USING BTREE, 
   UNIQUE KEY `chain_tx_uindex` (`chain_id`,`tx_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

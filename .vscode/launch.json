@@ -10,7 +10,7 @@
             "request": "launch",
             "mode": "auto",
             "program": "${workspaceFolder}/app/api/meta_land.go",
-            "args": ["-f", "etc/metaLand.yaml"],
+            "args": ["-f", "etc/meta_land.yaml"],
             "cwd": "${workspaceFolder}/app/api",
             "buildFlags": "-gcflags='all=-N -l'"
         }
