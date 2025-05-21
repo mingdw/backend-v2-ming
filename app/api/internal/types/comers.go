@@ -17,6 +17,7 @@ type ComerBasicResponse struct {
 	TimeZone       string `json:"time_zone"`
 }
 
+
 type IsConnectedResponse struct {
 	IsConnected bool `json:"is_connected"`
 }

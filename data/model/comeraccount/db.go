@@ -25,3 +25,11 @@ func UpdateComerAccount(db *gorm.DB, comerAccount *ComerAccount) (err error) {
 	}
 	return
 }
+
+func ListComerAccounts(db *gorm.DB, comerID uint64) (comerAccounts []*ComerAccount, err error) {
+	err = db.Where("comer_id = ? and is_deleted = 0", comerID).Find(&comerAccounts).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return
+}
