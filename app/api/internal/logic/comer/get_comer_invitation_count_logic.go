@@ -2,9 +2,11 @@ package comer
 
 import (
 	"context"
+	"errors"
 
 	"metaLand/app/api/internal/svc"
 	"metaLand/app/api/internal/types"
+	"metaLand/data/model/comer"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,7 +27,13 @@ func NewGetComerInvitationCountLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *GetComerInvitationCountLogic) GetComerInvitationCount() (resp *types.ComerInvitationCountResponse, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	comerInfo, ok := l.ctx.Value("comerInfo").(*comer.Comer)
+	if !ok {
+		return nil, errors.New("user not found")
+	}
+	logx.Infof("comerInfo: %+v", comerInfo)
+	return &types.ComerInvitationCountResponse{
+		ActivatedTotal: 0,
+		InactiveTotal:  0,
+	}, nil
 }

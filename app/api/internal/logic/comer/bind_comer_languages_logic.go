@@ -2,9 +2,13 @@ package comer
 
 import (
 	"context"
+	"errors"
+	"fmt"
 
 	"metaLand/app/api/internal/svc"
 	"metaLand/app/api/internal/types"
+	"metaLand/data/model/comer"
+	"metaLand/data/model/comerlanguage"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,8 +28,27 @@ func NewBindComerLanguagesLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
-func (l *BindComerLanguagesLogic) BindComerLanguages() (resp *types.MessageResponse, err error) {
-	// todo: add your logic here and delete this line
+func (l *BindComerLanguagesLogic) BindComerLanguages(req *types.BindComerLanguagesRequest) (resp *types.MessageResponse, err error) {
+	comerInfo, ok := l.ctx.Value("comerInfo").(*comer.Comer)
+	if !ok {
+		return nil, errors.New("user not found")
+	}
 
-	return
+	comerLanguage := &comerlanguage.ComerLanguage{
+		ComerId:  uint64(comerInfo.Id),
+		Language: req.Language,
+		Code:     req.Code,
+		Level:    req.Level,
+		IsNative: req.IsNative,
+	}
+
+	id, err := comerlanguage.CreateComerLanguage(l.svcCtx.DB, comerLanguage)
+	if err != nil {
+		return nil, err
+	}
+
+	return &types.MessageResponse{
+		Message: fmt.Sprintf("success, id: %d", id),
+	}, nil
+
 }

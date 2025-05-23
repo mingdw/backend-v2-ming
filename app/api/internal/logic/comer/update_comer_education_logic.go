@@ -5,6 +5,7 @@ import (
 
 	"metaLand/app/api/internal/svc"
 	"metaLand/app/api/internal/types"
+	"metaLand/data/model/comereducation"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,8 +25,23 @@ func NewUpdateComerEducationLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-func (l *UpdateComerEducationLogic) UpdateComerEducation() (resp *types.MessageResponse, err error) {
-	// todo: add your logic here and delete this line
+func (l *UpdateComerEducationLogic) UpdateComerEducation(req *types.UpdateComerEducationRequest) (resp *types.MessageResponse, err error) {
+	comerEducation := comereducation.ComerEducation{
+		Id:          uint64(req.ComerEducationId),
+		ComerId:     uint64(req.ComerId),
+		School:      req.School,
+		Degree:      req.Degree,
+		Major:       req.Major,
+		StartDate:   req.StartDate,
+		EndDate:     req.EndDate,
+		Description: req.Description,
+	}
+	err = comereducation.UpdateComerEducation(l.svcCtx.DB, &comerEducation)
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.MessageResponse{
+		Message: "success",
+	}, nil
 }

@@ -24,7 +24,7 @@ func NewGetTagsByTagTypeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
-func (l *GetTagsByTagTypeLogic) GetTagsByTagType() (resp *types.ListResponse, err error) {
+func (l *GetTagsByTagTypeLogic) GetTagsByTagType(req *types.GetTagsByTagTypeRequest) (resp *types.ListResponse, err error) {
 	// todo: add your logic here and delete this line
 
 	return

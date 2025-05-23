@@ -88,14 +88,14 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					// 绑定用户教育经历
-					Method:  http.MethodPost,
+					Method:  http.MethodPut,
 					Path:    "/educations",
 					Handler: comer.BindComerEducationsHandler(serverCtx),
 				},
 				{
 					// 更新用户教育经历
-					Method:  http.MethodPut,
-					Path:    "/educations/:comer_education_id",
+					Method:  http.MethodPost,
+					Path:    "/educations",
 					Handler: comer.UpdateComerEducationHandler(serverCtx),
 				},
 				{
@@ -118,13 +118,13 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					// 绑定用户语言
-					Method:  http.MethodPost,
+					Method:  http.MethodPut,
 					Path:    "/languages",
 					Handler: comer.BindComerLanguagesHandler(serverCtx),
 				},
 				{
 					// 更新用户语言
-					Method:  http.MethodPut,
+					Method:  http.MethodPost,
 					Path:    "/languages/:comer_language_id",
 					Handler: comer.UpdateComerLanguagesHandler(serverCtx),
 				},
@@ -142,26 +142,38 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					// 绑定用户技能
-					Method:  http.MethodPost,
+					Method:  http.MethodPut,
 					Path:    "/skills",
 					Handler: comer.BindComerSkillsHandler(serverCtx),
 				},
 				{
-					// 绑定用户社交
+					// 更新用户技能
 					Method:  http.MethodPost,
+					Path:    "/skills",
+					Handler: comer.UpdateComerSkillsHandler(serverCtx),
+				},
+				{
+					// 解绑用户技能
+					Method:  http.MethodDelete,
+					Path:    "/skills/:comer_skill_id",
+					Handler: comer.UnbindComerSkillsHandler(serverCtx),
+				},
+				{
+					// 绑定用户社交
+					Method:  http.MethodPut,
 					Path:    "/socials",
 					Handler: comer.BindComerSocialsHandler(serverCtx),
 				},
 				{
 					// 更新用户社交
-					Method:  http.MethodPut,
-					Path:    "/socials/:soical_book_id",
+					Method:  http.MethodPost,
+					Path:    "/socials",
 					Handler: comer.UpdateComerSocialsHandler(serverCtx),
 				},
 				{
 					// 解绑用户社交
 					Method:  http.MethodDelete,
-					Path:    "/socials/:soical_book_id",
+					Path:    "/socials/:comer_social_id",
 					Handler: comer.UnbindComerSocialsHandler(serverCtx),
 				},
 			}...,
@@ -242,7 +254,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					// 设置用户自定义域名
 					Method:  http.MethodPut,
-					Path:    "/domains",
+					Path:    "/domains/:custom_domain",
 					Handler: comers.SetUserCustomDomainHandler(serverCtx),
 				},
 				{
@@ -254,7 +266,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					// 查询自定义域名是否存在
 					Method:  http.MethodGet,
-					Path:    "/domains/existence",
+					Path:    "/domains/existence/:custom_domain",
 					Handler: comers.GetUserCustomDomainExistenceHandler(serverCtx),
 				},
 				{

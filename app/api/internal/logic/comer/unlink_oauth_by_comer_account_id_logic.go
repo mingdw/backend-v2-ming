@@ -5,6 +5,7 @@ import (
 
 	"metaLand/app/api/internal/svc"
 	"metaLand/app/api/internal/types"
+	"metaLand/data/model/comeraccount"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,7 +26,11 @@ func NewUnlinkOauthByComerAccountIdLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 func (l *UnlinkOauthByComerAccountIdLogic) UnlinkOauthByComerAccountId(req *types.UnlinkOauthByComerAccountIdRequest) (resp *types.MessageResponse, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	err = comeraccount.DeleteComerAccount(l.svcCtx.DB, uint64(req.ComerAccountId))
+	if err != nil {
+		return nil, err
+	}
+	return &types.MessageResponse{
+		Message: "success",
+	}, nil
 }

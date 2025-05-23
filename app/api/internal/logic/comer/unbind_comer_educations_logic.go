@@ -5,6 +5,7 @@ import (
 
 	"metaLand/app/api/internal/svc"
 	"metaLand/app/api/internal/types"
+	"metaLand/data/model/comereducation"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,8 +25,12 @@ func NewUnbindComerEducationsLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
-func (l *UnbindComerEducationsLogic) UnbindComerEducations() (resp *types.MessageResponse, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+func (l *UnbindComerEducationsLogic) UnbindComerEducations(req *types.UnbindComerEducationsRequest) (resp *types.MessageResponse, err error) {
+	err = comereducation.DeleteComerEducation(l.svcCtx.DB, uint64(req.ComerEducationId))
+	if err != nil {
+		return nil, err
+	}
+	return &types.MessageResponse{
+		Message: "success",
+	}, nil
 }

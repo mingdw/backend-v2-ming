@@ -5,6 +5,7 @@ import (
 
 	"metaLand/app/api/internal/svc"
 	"metaLand/app/api/internal/types"
+	"metaLand/data/model/comersocial"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,8 +25,12 @@ func NewUnbindComerSocialsLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
-func (l *UnbindComerSocialsLogic) UnbindComerSocials() (resp *types.MessageResponse, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+func (l *UnbindComerSocialsLogic) UnbindComerSocials(req *types.UnbindComerSocialsRequest) (resp *types.MessageResponse, err error) {
+	err = comersocial.DeleteComerSocial(l.svcCtx.DB, uint64(req.ComerSocialId))
+	if err != nil {
+		return nil, err
+	}
+	return &types.MessageResponse{
+		Message: "success",
+	}, nil
 }

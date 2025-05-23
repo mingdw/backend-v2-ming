@@ -3,6 +3,41 @@
 
 package types
 
+type BindComerEducationsRequest struct {
+	ComerId     int64  `json:"comer_id"`
+	School      string `json:"school" binding:"required"`
+	Degree      string `json:"degree"`
+	Major       string `json:"major" binding:"required"`
+	StartDate   string `json:"start_date"`
+	EndDate     string `json:"end_date"`
+	Description string `json:"description"`
+}
+
+type BindComerLanguagesRequest struct {
+	ComerId  int64  `json:"comer_id"`
+	Language string `json:"language" binding:"required"`
+	Code     string `json:"code"`
+	Level    int    `json:"level"`
+	IsNative bool   `json:"is_native"`
+}
+
+type BindComerSkillsRequest struct {
+	ComerId     int64  `json:"comer_id"`
+	SkillName   string `json:"skill_name" binding:"required"`
+	Level       int    `json:"level"`
+	Years       int    `json:"years"`
+	Description string `json:"description"`
+}
+
+type BindComerSocialsRequest struct {
+	ComerId      int64  `json:"comer_id"`
+	PlatformName string `json:"platform_name"`
+	UserName     string `json:"user_name"`
+	PlatformId   string `json:"platform_id"`
+	Url          string `json:"url"`
+	IsVerified   bool   `json:"is_verified"`
+}
+
 type ComerInfoDetailResponse struct {
 	Accounts       []ComerAccountResponse      `json:"accounts"`
 	Activation     bool                        `json:"activation"`
@@ -11,7 +46,7 @@ type ComerInfoDetailResponse struct {
 	Banner         string                      `json:"banner"`
 	ConnectedTotal ComerConnectedTotalResponse `json:"connected_total"`
 	CustomDomain   string                      `json:"custom_domain"`
-	Educations     []ComerEducation            `json:"educations"`
+	Educations     []ComerEducationResponse    `json:"educations"`
 	Id             int                         `json:"id"`
 	Info           ComerInfo                   `json:"info"`
 	InvitationCode string                      `json:"invitation_code"`
@@ -19,8 +54,8 @@ type ComerInfoDetailResponse struct {
 	Languages      []ComerLanguageResponse     `json:"languages"`
 	Location       string                      `json:"location"`
 	Name           string                      `json:"name"`
-	Skills         []TagRelationResponse       `json:"skills"`
-	Socials        []SocialBookResponse        `json:"socials"`
+	Skills         []ComerSkillResponse        `json:"skills"`
+	Socials        []ComerSocialResponse       `json:"socials"`
 	TimeZone       string                      `json:"time_zone"`
 }
 
@@ -60,26 +95,87 @@ type StartupListResponse struct {
 	Total int                 `json:"total"`
 }
 
+type UnbindComerEducationsRequest struct {
+	ComerEducationId int64 `path:"comer_education_id"`
+}
+
+type UnbindComerLanguagesRequest struct {
+	ComerLanguageId int64 `path:"comer_language_id" validate:"required,gte=0"`
+}
+
+type UnbindComerSkillsRequest struct {
+	ComerSkillId int64 `path:"comer_skill_id" validate:"required,gte=0"`
+}
+
+type UnbindComerSocialsRequest struct {
+	ComerSocialId int64 `path:"comer_social_id" validate:"required,gte=0"`
+}
+
 type UnlinkOauthByComerAccountIdRequest struct {
 	ComerAccountId int64 `path:"comer_account_id" validate:"required,gte=0"`
 }
 
+type UpdateComerEducationRequest struct {
+	ComerEducationId int64  `json:"comer_education_id"`
+	ComerId          int64  `json:"comer_id"`
+	School           string `json:"school"`
+	Degree           string `json:"degree"`
+	Major            string `json:"major"`
+	StartDate        string `json:"start_date"`
+	EndDate          string `json:"end_date"`
+	Description      string `json:"description"`
+}
+
+type UpdateComerInfoBioRequest struct {
+	Bio string `json:"bio" binding:"required"`
+}
+
 type UpdateComerInfoRequest struct {
-	ComerId    int64  `json:"comer_id"`
-	Name       string `json:"name"`
-	Avatar     string `json:"avatar"`
-	Cover      string `json:"cover"`
-	Location   string `json:"location"`
-	TimeZone   string `json:"time_zone"`
-	Website    string `json:"website"`
-	Email      string `json:"email"`
-	Twitter    string `json:"twitter"`
-	Discord    string `json:"discord"`
-	Telegram   string `json:"telegram"`
-	Medium     string `json:"medium"`
-	Facebook   string `json:"facebook"`
-	Linktree   string `json:"linktree"`
-	Bio        string `json:"bio"`
-	Languages  string `json:"languages"`
-	Educations string `json:"educations"`
+	ComerId    int64                    `json:"comer_id"`
+	Name       string                   `json:"name"`
+	Avatar     string                   `json:"avatar"`
+	Cover      string                   `json:"cover"`
+	Location   string                   `json:"location"`
+	TimeZone   string                   `json:"time_zone"`
+	Website    string                   `json:"website"`
+	Email      string                   `json:"email"`
+	Twitter    string                   `json:"twitter"`
+	Discord    string                   `json:"discord"`
+	Telegram   string                   `json:"telegram"`
+	Medium     string                   `json:"medium"`
+	Facebook   string                   `json:"facebook"`
+	Linktree   string                   `json:"linktree"`
+	Bio        string                   `json:"bio"`
+	Languages  []LanguageResponse       `json:"languages"`
+	Skills     []ComerSkillResponse     `json:"skills"`
+	Educations []ComerEducationResponse `json:"educations"`
+	Socials    []ComerSocialResponse    `json:"socials"`
+}
+
+type UpdateComerLanguagesRequest struct {
+	ComerLanguageId int64  `path:"comer_language_id" validate:"required,gte=0"`
+	ComerId         int64  `json:"comer_id"`
+	Language        string `json:"language" binding:"required"`
+	Code            string `json:"code"`
+	Level           int    `json:"level"`
+	IsNative        bool   `json:"is_native"`
+}
+
+type UpdateComerSkillsRequest struct {
+	ComerSkillId int64  `path:"comer_skill_id" validate:"required,gte=0"`
+	ComerId      int64  `json:"comer_id"`
+	SkillName    string `json:"skill_name"`
+	Level        int    `json:"level"`
+	Years        int    `json:"years"`
+	Description  string `json:"description"`
+}
+
+type UpdateComerSocialsRequest struct {
+	ComerSocialId int64  `path:"comer_social_id" validate:"required,gte=0"`
+	ComerId       int64  `json:"comer_id"`
+	PlatformName  string `json:"platform_name"`
+	UserName      string `json:"user_name"`
+	PlatformId    string `json:"platform_id"`
+	Url           string `json:"url"`
+	IsVerified    bool   `json:"is_verified"`
 }

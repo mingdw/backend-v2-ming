@@ -4,7 +4,10 @@
 package types
 
 type LanguageResponse struct {
-	Code string `json:"code"`
-	Id   int    `json:"id"`
-	Name string `json:"name"`
+	Id       int    `json:"id"`
+	ComerId  int    `json:"comer_id"`
+	Code     string `json:"code"`
+	Language string `json:"language"`
+	Level    int    `json:"level"`
+	IsNative bool   `json:"is_native"`
 }

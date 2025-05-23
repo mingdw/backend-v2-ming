@@ -45,3 +45,11 @@ func DeleteTagRel(db *gorm.DB, comerID uint64, target Category, skillIds []uint6
 func BatchCreateTagRel(db *gorm.DB, tagTargetRelList []TagTargetRel) error {
 	return db.Clauses(clause.OnConflict{DoNothing: true}).Create(&tagTargetRelList).Error
 }
+
+func ListTags(db *gorm.DB, tagList *[]Tag) error {
+	return db.Table("tag").Find(tagList).Error
+}
+
+func ListTagRelations(db *gorm.DB, tagTargetRelList *[]TagTargetRel) error {
+	return db.Table("tag_target_rel").Find(tagTargetRelList).Error
+}

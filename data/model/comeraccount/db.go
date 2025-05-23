@@ -33,3 +33,11 @@ func ListComerAccounts(db *gorm.DB, comerID uint64) (comerAccounts []*ComerAccou
 	}
 	return
 }
+
+func DeleteComerAccount(db *gorm.DB, comerAccountID uint64) (err error) {
+	err = db.Model(&ComerAccount{}).Where("id = ?", comerAccountID).Update("is_deleted", 1).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return err
+	}
+	return
+}

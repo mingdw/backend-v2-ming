@@ -24,7 +24,7 @@ func NewGetComerInfoDetailByComerIdLogic(ctx context.Context, svcCtx *svc.Servic
 	}
 }
 
-func (l *GetComerInfoDetailByComerIdLogic) GetComerInfoDetailByComerId() (resp *types.ComerInfoDetailResponse, err error) {
+func (l *GetComerInfoDetailByComerIdLogic) GetComerInfoDetailByComerId(req *types.GetComerInfoDetailByComerIdRequest) (resp *types.ComerInfoDetailResponse, err error) {
 	// todo: add your logic here and delete this line
 
 	return

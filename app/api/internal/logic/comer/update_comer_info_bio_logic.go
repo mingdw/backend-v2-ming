@@ -2,9 +2,11 @@ package comer
 
 import (
 	"context"
+	"errors"
 
 	"metaLand/app/api/internal/svc"
 	"metaLand/app/api/internal/types"
+	"metaLand/data/model/comer"
 	"metaLand/data/model/comerprofile"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -25,14 +27,13 @@ func NewUpdateComerInfoBioLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
-func (l *UpdateComerInfoBioLogic) UpdateComerInfoBio(req *types.UpdateComerInfoRequest) (resp *types.MessageResponse, err error) {
-	// todo: add your logic here and delete this line
-	comerInfo, err := comerprofile.FindComerProfile(l.svcCtx.DB, uint64(req.ComerId))
-	if err != nil {
-		return nil, err
+func (l *UpdateComerInfoBioLogic) UpdateComerInfoBio(req *types.UpdateComerInfoBioRequest) (resp *types.MessageResponse, err error) {
+	comerInfo, ok := l.ctx.Value("comerInfo").(*comer.Comer)
+	if !ok {
+		return nil, errors.New("user not found")
 	}
-	comerInfo.Bio = req.Bio
-	err = comerprofile.UpdateComerProfile(l.svcCtx.DB, uint64(req.ComerId), map[string]interface{}{
+
+	err = comerprofile.UpdateComerProfile(l.svcCtx.DB, uint64(comerInfo.Id), map[string]interface{}{
 		"bio": req.Bio,
 	})
 	if err != nil {

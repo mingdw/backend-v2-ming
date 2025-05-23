@@ -2,9 +2,12 @@ package share
 
 import (
 	"context"
+	"errors"
+
+	"metaLand/app/api/internal/svc"
+	"metaLand/data/model/comer"
 
 	"github.com/zeromicro/go-zero/core/logx"
-	"metaLand/app/api/internal/svc"
 )
 
 type GetSharePageHtmlLogic struct {
@@ -23,7 +26,11 @@ func NewGetSharePageHtmlLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *GetSharePageHtmlLogic) GetSharePageHtml() (resp string, err error) {
-	// todo: add your logic here and delete this line
+	// 获取分享码
+	comerInfo, ok := l.ctx.Value("comerInfo").(*comer.Comer)
+	if !ok {
+		return "", errors.New("user not found")
+	}
 
-	return
+	return comerInfo.Address, nil
 }

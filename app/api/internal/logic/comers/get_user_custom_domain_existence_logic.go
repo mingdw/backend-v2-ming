@@ -24,7 +24,7 @@ func NewGetUserCustomDomainExistenceLogic(ctx context.Context, svcCtx *svc.Servi
 	}
 }
 
-func (l *GetUserCustomDomainExistenceLogic) GetUserCustomDomainExistence() (resp *types.IsExistResponse, err error) {
+func (l *GetUserCustomDomainExistenceLogic) GetUserCustomDomainExistence(req *types.GetUserCustomDomainExistenceRequest) (resp *types.IsExistResponse, err error) {
 	// todo: add your logic here and delete this line
 
 	return

@@ -24,7 +24,7 @@ func NewGetComerByAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-func (l *GetComerByAddressLogic) GetComerByAddress() (resp *types.ComerBasicResponse, err error) {
+func (l *GetComerByAddressLogic) GetComerByAddress(req *types.GetComerByAddressRequest) (resp *types.ComerBasicResponse, err error) {
 	// todo: add your logic here and delete this line
 
 	return

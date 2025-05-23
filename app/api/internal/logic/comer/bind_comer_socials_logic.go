@@ -2,9 +2,13 @@ package comer
 
 import (
 	"context"
+	"errors"
+	"fmt"
 
 	"metaLand/app/api/internal/svc"
 	"metaLand/app/api/internal/types"
+	"metaLand/data/model/comer"
+	"metaLand/data/model/comersocial"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,8 +28,26 @@ func NewBindComerSocialsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
-func (l *BindComerSocialsLogic) BindComerSocials() (resp *types.MessageResponse, err error) {
-	// todo: add your logic here and delete this line
+func (l *BindComerSocialsLogic) BindComerSocials(req *types.BindComerSocialsRequest) (resp *types.MessageResponse, err error) {
+	comerInfo, ok := l.ctx.Value("comerInfo").(*comer.Comer)
+	if !ok {
+		return nil, errors.New("user not found")
+	}
 
-	return
+	comerSocial := &comersocial.ComerSocial{
+		ComerId:    uint64(comerInfo.Id),
+		Platform:   req.PlatformName,
+		Username:   req.UserName,
+		Url:        req.Url,
+		IsVerified: req.IsVerified,
+	}
+
+	id, err := comersocial.CreateComerSocial(l.svcCtx.DB, comerSocial)
+	if err != nil {
+		return nil, err
+	}
+
+	return &types.MessageResponse{
+		Message: fmt.Sprintf("success, id: %d", id),
+	}, nil
 }

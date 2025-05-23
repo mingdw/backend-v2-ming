@@ -24,7 +24,7 @@ func NewGetComerParticipatedCountByComerIdLogic(ctx context.Context, svcCtx *svc
 	}
 }
 
-func (l *GetComerParticipatedCountByComerIdLogic) GetComerParticipatedCountByComerId() (resp *types.ProjectCountResponse, err error) {
+func (l *GetComerParticipatedCountByComerIdLogic) GetComerParticipatedCountByComerId(req *types.GetComerParticipatedCountByComerIdRequest) (resp *types.ProjectCountResponse, err error) {
 	// todo: add your logic here and delete this line
 
 	return

@@ -24,7 +24,7 @@ func NewConnectedComerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Co
 	}
 }
 
-func (l *ConnectedComerLogic) ConnectedComer() (resp *types.IsConnectedResponse, err error) {
+func (l *ConnectedComerLogic) ConnectedComer(req *types.GetConnectedComerRequest) (resp *types.IsConnectedResponse, err error) {
 	// todo: add your logic here and delete this line
 
 	return

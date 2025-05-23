@@ -3,6 +3,10 @@
 
 package types
 
+type GetTagsByTagTypeRequest struct {
+	Type int `path:"type"`
+}
+
 type ListResponse struct {
 	Page  int64         `json:"page"`
 	Size  int64         `json:"size"`

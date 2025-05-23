@@ -1,7 +1,7 @@
 package tag
 
 import (
-	"gorm.io/gorm"
+	"time"
 )
 
 type Category string
@@ -12,12 +12,29 @@ const (
 	Bounty     Category = "bounty"
 )
 
+// TypeToCategory 将 type 值转换为对应的 Category
+func TypeToCategory(typeValue int) Category {
+	switch typeValue {
+	case 1:
+		return ComerSkill
+	case 2:
+		return Startup
+	case 3:
+		return Bounty
+	default:
+		return ""
+	}
+}
+
 // Tag  Comunion tag for startup bounty profile and other position need Tag.
 type Tag struct {
-	gorm.Model
-	Name     string   `gorm:"column:name" json:"name"`
-	Category Category `gorm:"column:category" json:"category"`
-	IsIndex  bool     `gorm:"column:is_index" json:"isIndex"`
+	ID        uint `gorm:"primarykey"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	Name      string   `gorm:"column:name" json:"name"`
+	Category  Category `gorm:"column:category" json:"category"`
+	IsIndex   bool     `gorm:"column:is_index" json:"isIndex"`
+	IsDeleted bool     `gorm:"column:is_deleted" json:"isDeleted"`
 }
 
 // TableName identify the table name of this model.
@@ -27,10 +44,12 @@ func (Tag) TableName() string {
 
 // TagTargetRel  Comunion tag for startup bounty profile and other position need TagTargetRel.
 type TagTargetRel struct {
-	gorm.Model
-	TargetID uint64   `column:"target_id"`
-	Target   Category `column:"target"`
-	TagID    uint64   `column:"tag_id"`
+	ID        uint `gorm:"primarykey"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	TargetID  uint64   `column:"target_id"`
+	Target    Category `column:"target"`
+	TagID     uint64   `column:"tag_id"`
 }
 
 // TableName identify the table name of this model.

@@ -5,6 +5,7 @@ import (
 
 	"metaLand/app/api/internal/svc"
 	"metaLand/app/api/internal/types"
+	"metaLand/data/model/comerlanguage"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,8 +25,13 @@ func NewUnbindComerLanguagesLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-func (l *UnbindComerLanguagesLogic) UnbindComerLanguages() (resp *types.MessageResponse, err error) {
-	// todo: add your logic here and delete this line
+func (l *UnbindComerLanguagesLogic) UnbindComerLanguages(req *types.UnbindComerLanguagesRequest) (resp *types.MessageResponse, err error) {
+	err = comerlanguage.DeleteComerLanguage(l.svcCtx.DB, uint64(req.ComerLanguageId))
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.MessageResponse{
+		Message: "success",
+	}, nil
 }

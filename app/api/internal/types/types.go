@@ -27,12 +27,17 @@ type ComerConnectedTotalResponse struct {
 	ConnectStartupTotal int `json:"connect_startup_total"`
 }
 
-type ComerEducation struct {
+type ComerEducationResponse struct {
 	ComerId     int    `json:"comer_id"`
 	GraduatedAt string `json:"graduated_at"`
 	Id          int    `json:"id"`
 	Major       string `json:"major"`
 	School      string `json:"school"`
+	StartDate   string `json:"start_date"`
+	EndDate     string `json:"end_date"`
+	Description string `json:"description"`
+	Level       int    `json:"level"`
+	Degree      string `json:"degree"`
 }
 
 type ComerInfo struct {
@@ -42,21 +47,35 @@ type ComerInfo struct {
 }
 
 type ComerLanguageResponse struct {
-	ComerId    int      `json:"comer_id"`
-	Id         int      `json:"id"`
-	Language   Language `json:"language"`
-	LanguageId int      `json:"language_id"`
-	Level      int      `json:"level"`
+	ComerId  int    `json:"comer_id"`
+	Id       int    `json:"id"`
+	Language string `json:"language"`
+	Code     string `json:"code"`
+	Level    int    `json:"level"`
+	IsNative bool   `json:"is_native"`
+}
+
+type ComerSkillResponse struct {
+	ComerId     int    `json:"comer_id"`
+	Id          int    `json:"id"`
+	SkillName   string `json:"skill_name"`
+	Level       int    `json:"level"`
+	Years       int    `json:"years"`
+	Description string `json:"description"`
+}
+
+type ComerSocialResponse struct {
+	ComerId      int    `json:"comer_id"`
+	Id           int    `json:"id"`
+	PlatformName string `json:"platform_name"`
+	UserName     string `json:"user_name"`
+	PlatformId   string `json:"platform_id"`
+	IsVerified   bool   `json:"is_verified"`
+	Url          string `json:"url"`
 }
 
 type FollowRelation struct {
 	ComerID uint64 `json:comerID`
-}
-
-type Language struct {
-	Code string `json:"code"`
-	Id   int    `json:"id"`
-	Name string `json:"name"`
 }
 
 type OauthAccountBindingInfo struct {
@@ -70,21 +89,6 @@ type SimpleStartupInfo struct {
 	Id      int    `json:"id"`
 	Name    string `json:"name"`
 	OnChain bool   `json:"on_chain"`
-}
-
-type SocialBookResponse struct {
-	Id           int                `json:"id"`
-	SocialTool   SocialToolResponse `json:"social_tool"`
-	SocialToolId int                `json:"social_tool_id"`
-	TargetId     int                `json:"target_id"`
-	Type         int                `json:"type"`
-	Value        string             `json:"value"`
-}
-
-type SocialToolResponse struct {
-	Id   int    `json:"id"`
-	Logo string `json:"logo"`
-	Name string `json:"name"`
 }
 
 type Startup struct {
@@ -130,9 +134,9 @@ type TagRelationResponse struct {
 }
 
 type TagResponse struct {
-	Id   int    `json:"id"`
-	Name string `json:"name"`
-	Type int    `json:"type"`
+	Id       int    `json:"id"`
+	Name     string `json:"name"`
+	Category string `json:"category"`
 }
 
 type Wallet struct {

@@ -17,6 +17,53 @@ type ComerBasicResponse struct {
 	TimeZone       string `json:"time_zone"`
 }
 
+type ConnectComerRequest struct {
+	ComerId int64 `path:"comer_id" binding:"required"`
+}
+
+type GetComerBeConnectComersByComerIdRequest struct {
+	ComerId int64 `path:"comer_id" binding:"required"`
+}
+
+type GetComerByAddressRequest struct {
+	Address string `path:"address" binding:"required"`
+}
+
+type GetComerByComerIdRequest struct {
+	ComerId int64 `path:"comer_id" binding:"required"`
+}
+
+type GetComerConnectComersByComerIdRequest struct {
+	ComerId int64 `path:"comer_id" binding:"required"`
+}
+
+type GetComerConnectStartupsByComerIdRequest struct {
+	ComerId int64 `path:"comer_id" binding:"required"`
+}
+
+type GetComerInfoDetailByComerIdRequest struct {
+	ComerId int64 `path:"comer_id" binding:"required"`
+}
+
+type GetComerParticipatedCountByComerIdRequest struct {
+	ComerId int64 `path:"comer_id" binding:"required"`
+}
+
+type GetComerPostedCountByComerIdRequest struct {
+	ComerId int64 `path:"comer_id" binding:"required"`
+}
+
+type GetConnectedComerRequest struct {
+	ComerId int64 `path:"comer_id" binding:"required"`
+}
+
+type GetUserCustomDomainExistenceRequest struct {
+	CustomDomain string `path:"custom_domain" binding:"required"`
+}
+
+type GetUserCustomDomainRequest struct {
+	CustomDomain string `path:"custom_domain" binding:"required"`
+}
 
 type IsConnectedResponse struct {
 	IsConnected bool `json:"is_connected"`
@@ -25,7 +72,6 @@ type IsConnectedResponse struct {
 type IsExistResponse struct {
 	IsExist bool `json:"is_exist"`
 }
-
 
 type ProjectCountResponse struct {
 	BountyCount        int `json:"bounty_count"`
@@ -36,6 +82,14 @@ type ProjectCountResponse struct {
 	StartupCount       int `json:"startup_count"`
 }
 
+type SetUserCustomDomainRequest struct {
+	CustomDomain string `json:"custom_domain" binding:"required"`
+}
+
 type ThirdPartyVerifyResponse struct {
 	Verify bool `json:"verify"`
+}
+
+type UnconnectComerRequest struct {
+	ComerId int64 `path:"comer_id" binding:"required"`
 }
